@@ -16,18 +16,15 @@
 
     <div class="container">
       <h1>CPU info</h1>
-      <p>
-        <b>
-          Output of <code>/proc/cpuinfo</code>.
-        </b>
-      </p>
-      <pre>{{ cpuinfo }}</pre>
-      <p>
-        <b>
-          Output of <code>ps -auxf</code>.
-        </b>
-      </p>
-      <pre>{{ psauxf }}</pre>
+      {% for name, outout in info %}
+        <p>
+          <b>
+            <code>{{ name }}</code> Output:
+          </b>
+        </p>
+        <pre>{{ outout }}</pre>
+        <hr>
+      {% endfor %}
     </div>
   </body>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>

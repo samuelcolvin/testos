@@ -6,9 +6,9 @@ import aiohttp_jinja2
 import jinja2
 
 
-async def get_ps():
+async def exec_command(*command):
 
-    create = asyncio.create_subprocess_exec('ps', '-auxf', stdout=asyncio.subprocess.PIPE)
+    create = asyncio.create_subprocess_exec(*command, stdout=asyncio.subprocess.PIPE)
     proc = await create
 
     data = await proc.stdout.read()
@@ -22,8 +22,11 @@ async def get_ps():
 async def handle(request):
     with open('/proc/cpuinfo') as f:
         return {
-            'cpuinfo': f.read(),
-            'psauxf': await get_ps()
+            'info': [
+                ('uname -a', await exec_command('uname', '-a')),
+                ('/proc/cpuinfo', f.read()),
+                ('ps -auxf', await exec_command('ps', '-auxf')),
+            ]
         }
 
 

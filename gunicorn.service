@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=root
+Group=nginx
+WorkingDirectory=/var/www/testos
+ExecStart=/var/www/testos/env/bin/gunicorn -b unix:/var/www/testos/gunicorn.sock -k aiohttp.worker.GunicornWebWorker -t 60 --reload app:app
+
+[Install]
+WantedBy=multi-user.target

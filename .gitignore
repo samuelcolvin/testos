@@ -1,0 +1,15 @@
+*.py[cod]
+.idea/
+env/
+node_modules/
+examples/
+.cache/
+.coverage
+.coverage.*
+coverage.xml
+try.py
+harrier.yml
+.serve/
+/build/
+/htmlcov/
+/harrier/livereload.js
